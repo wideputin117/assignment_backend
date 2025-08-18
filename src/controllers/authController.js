@@ -121,11 +121,11 @@ export const login = asyncHandler(async (req, res, next) => {
     });
     if (!existingUser) return next(new ApiError("User not found", 400));
 
-     if (!existingUser.isVerified) {
-        return next(
-            new ApiError("Please verify your email before logging in.", 403)
-        );
-    }
+    //  if (!existingUser.isVerified) {
+    //     return next(
+    //         new ApiError("Please verify your email before logging in.", 403)
+    //     );
+    // }
 
     const isValidPassword = await existingUser.isPasswordCorrect(password);
 

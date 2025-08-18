@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs"
+import bcrypt from "bcrypt"
 import {
     configDotenv
 } from "dotenv"
@@ -16,14 +16,15 @@ const seed = async () => {
         await connectToMongoDB()
 
         console.log("Clearing old data...")
-        await User.deleteMany({})
-        await Project.deleteMany({})
-        await Task.deleteMany({})
+        // await User.deleteMany({})
+        // await Project.deleteMany({})
+        // await Task.deleteMany({})
 
         console.log("Seeding new data...")
 
         const hashedPassword = await bcrypt.hash("Test@123", 10)
         const user = await User.create({
+            name:"Manish",
             email: "test@example.com",
             password: hashedPassword,
         })
