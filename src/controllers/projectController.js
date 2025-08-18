@@ -3,7 +3,7 @@ import ApiError from "../utils/error/ApiError.js";
 import { asyncHandler } from "../utils/error/asyncHandler.js";
 
 export const createProject = asyncHandler(async(req, res, next)=>{
-    const userId = req?.user?._id
+    const userId = req?.user?._idnpm 
     const {title,description,status} = req.body;
     if(!title || !description){
         return next(new ApiError("Inavlid Request",400))

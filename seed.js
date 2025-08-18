@@ -14,19 +14,12 @@ configDotenv()
 const seed = async () => {
     try {
         await connectToMongoDB()
-
-        console.log("Clearing old data...")
-        // await User.deleteMany({})
-        // await Project.deleteMany({})
-        // await Task.deleteMany({})
-
-        console.log("Seeding new data...")
-
-        const hashedPassword = await bcrypt.hash("Test@123", 10)
+        
+        const password="Test@123"
         const user = await User.create({
             name:"Manish",
             email: "test@example.com",
-            password: hashedPassword,
+            password: password,
         })
 
          const projects = await Project.insertMany([{

@@ -29,6 +29,7 @@ app.use(
             [
                 "http://localhost:3000",
                 "http://localhost:3001",
+                "https://sofrik-frontend.vercel.app"
             ],
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // Specify allowed HTTP methods
         allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
