@@ -28,7 +28,7 @@ export const getAllProjects = asyncHandler(async (req, res, next) => {
 
   const total = await Project.countDocuments({ userId });
   const projects = await Project.find({ userId })
-    .populate("tasks")
+    // .populate("tasks")
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit);
