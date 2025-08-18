@@ -33,11 +33,15 @@ export const getAllProjects = asyncHandler(async (req, res, next) => {
     .skip(skip)
     .limit(limit);
 
+    const paginate={
+      totalPages:Math.ceil(total / limit),
+      total:total,
+      page:page,
+      limit:limit
+    }
   return res.status(200).json({
     success: true,
-    total,
-    page,
-    pages: Math.ceil(total / limit),
+    paginate:paginate,
     data: projects,
   });
 });

@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js --delay 2",
-    "start": "node index.js"
+    "start": "node index.js",
+    "seed": "node seed.js"
   },
   "dependencies": {
     "arctic": "^3.7.0",
