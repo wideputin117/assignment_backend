@@ -10,7 +10,7 @@ import { generateOTP } from "../utils/generateOtp.js";
 export const signup_controller = asyncHandler(async(req, res, next)=>{
    const {name,email, phoneNumber, password} = req.body;
    console.log("the request body is", req.body)
-   const otp = generateOTP()
+//    const otp = generateOTP()
    if(!name,!email,!phoneNumber,!password){
     return next(new ApiError('Invalid Fields',400))
    }
@@ -20,40 +20,41 @@ export const signup_controller = asyncHandler(async(req, res, next)=>{
                if(existingUser?.isVerified){
                return next(new ApiError('User Already Exist', 400))
                }
-               await sendRegistrationOTPOnMail(email, { name, otp })
-                await OTP.findOneAndReplace(
-                { email, type: "REGISTER" },
-                { otp, email, type: "REGISTER" },
-                { upsert: true, new: true }  
-            );
 
-            return res.status(200).json({
-                success: true,
-                message: "OTP resent successfully. Please verify your email.",
-            });
+            //    await sendRegistrationOTPOnMail(email, { name, otp })
+            //     await OTP.findOneAndReplace(
+            //     { email, type: "REGISTER" },
+            //     { otp, email, type: "REGISTER" },
+            //     { upsert: true, new: true }  
+            // );
+
+            // return res.status(200).json({
+            //     success: true,
+            //     message: "OTP resent successfully. Please verify your email.",
+            // });
      }
      /** for new user */
-    await sendRegistrationOTPOnMail(email, {
-        name,
-        otp
-    });
-    await OTP.create({
-        otp,
-        email,
-        type: "REGISTER",
-    });
+    // await sendRegistrationOTPOnMail(email, {
+    //     name,
+    //     otp
+    // });
+    // await OTP.create({
+    //     otp,
+    //     email,
+    //     type: "REGISTER",
+    // });
     await User.create({
         ...req?.body,
-        isVerified : false
+        isVerified : true
     }); // thsi will through error if user creation fails
     res.status(201).json({
         success: true,
-        message: "OTP sent successfully. Please verify your email.",
+        message: "User registered successfully.",
     });
     }
     catch (error) {
-        console.error("Error Sending OTP:", error);
-        return next(new ApiError(`Failed to send OTP: ${error.message}`, 400));
+        console.error("Error:", error);
+        return next(new ApiError(`Failed to register: ${error.message}`, 400));
     }
 })
 
